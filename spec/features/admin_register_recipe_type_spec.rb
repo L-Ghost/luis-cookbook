@@ -20,8 +20,9 @@ feature 'Admin register Recipe Type' do
 
     fill_in 'Nome', with: ''
     click_on 'Enviar'
-
-    expect(page).to have_content('h1', text: 'Você precisa informar o nome do Tipo de Receita')
+    
+    expect(page).to have_css('h2', text: 'Não foi possível salvar o Tipo de Receita')
+    expect(page).to have_content('Você precisa informar o nome do Tipo de Receita')
     expect(RecipeType.count).to eq(0)
   end
 
@@ -36,7 +37,8 @@ feature 'Admin register Recipe Type' do
     fill_in 'Nome', with: 'Sobremesa'
     click_on 'Enviar'
     
-    expect(page).to have_content('h1', text: 'Já existe um Tipo de Receita com o nome informado')
+    expect(page).to have_css('h2', text: 'Não foi possível salvar o Tipo de Receita')
+    expect(page).to have_content('Já existe um Tipo de Receita com o nome informado')
     expect(RecipeType.count).to eq(1)
   end
   
