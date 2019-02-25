@@ -26,6 +26,7 @@ feature 'User register recipe' do
     fill_in 'Tempo de Preparo', with: 40
     fill_in 'Ingredientes', with: '1 batata média cozida, 1 beterraba cozida, 1/2 xícara de polvilho azedo, 2 colheres de sopa de azeite, 1 olher de chá de sal, 1/2 colher de levedo de cerveja (opcional)'
     fill_in 'Modo de Preparo', with: 'Amasse a batata e a beterraba ainda quentes até quase virar um purê. Em seguida adicione o azeite, levedo de cerveja, sal e misture bem. Adicione o polvilho azedo e o doce...'
+    attach_file 'Foto', Rails.root.join('spec', 'support', 'pdqdb.jpeg') # Renata picture
 
     click_on 'Enviar'
 
@@ -39,7 +40,8 @@ feature 'User register recipe' do
     expect(page).to have_css('h3', text: 'Ingredientes')
     expect(page).to have_css('p', text: '1 batata média cozida, 1 beterraba cozida, 1/2 xícara de polvilho azedo, 2 colheres de sopa de azeite, 1 olher de chá de sal, 1/2 colher de levedo de cerveja (opcional)')
     expect(page).to have_css('h3', text: 'Como Preparar')
-    expect(page).to have_css('p', text: 'Amasse a batata e a beterraba ainda quentes até quase virar um purê. Em seguida adicione o azeite, levedo de cerveja, sal e misture bem. Adicione o polvilho azedo e o doce...')    
+    expect(page).to have_css('p', text: 'Amasse a batata e a beterraba ainda quentes até quase virar um purê. Em seguida adicione o azeite, levedo de cerveja, sal e misture bem. Adicione o polvilho azedo e o doce...')
+    expect(page).to have_css('img[src*="pdqdb.jpeg"]')
   end
 
   scenario 'and leave some fields blank' do
