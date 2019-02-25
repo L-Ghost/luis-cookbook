@@ -25,8 +25,8 @@ feature 'User delete recipe' do
 
     expect(current_path).to eq(root_path)
     expect(Recipe.count).to eq(1)
-    expect(page).not_to have_css('h1', 'Pão de Queijo de Beterraba')
-    expect(page).to have_css('h1', 'Peixinho da Horta')
+    expect(page).not_to have_css('h1', text: 'Pão de Queijo de Beterraba')
+    expect(page).to have_css('h1', text: 'Peixinho da Horta')
   end
 
 end
