@@ -23,11 +23,11 @@ feature 'User search Recipe' do
   scenario 'and finds a recipe' do
     visit root_path
     click_on 'Buscar uma Receita'
-    expec(page).to have_css('h1', text: 'Busca de Receitas')
+    expect(page).to have_css('h1', text: 'Busca de Receitas')
     
     fill_in 'Procurar por', with: 'Morango'
     click_on 'Buscar'
-
+    
     expect(page).to have_css('h2', text: 'Total de Receitas encontradas: 1')
     expect(page).to have_content('Torta de Morango')
     expect(page).not_to have_content('Torta de Limão')

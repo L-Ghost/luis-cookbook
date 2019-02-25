@@ -47,6 +47,12 @@ class RecipesController < ApplicationController
     @recipe.destroy
     redirect_to :root
   end
+  
+  def search
+    if !params[:q].blank?
+      @recipes = Recipe.where("title like ?", "%#{params[:q]}%")
+    end
+  end
 
   private
 

@@ -6,6 +6,8 @@
 <%= link_to 'Cadastrar novo Tipo de Receita', new_recipe_type_path %>
 <%= link_to 'Cadastrar nova Cozinha', new_cuisine_path %>
 
+<%= link_to 'Buscar uma Receita', :recipes_search %>
+
 <ul>
   <% @recipes.each do |recipe| %>
     <h1>
