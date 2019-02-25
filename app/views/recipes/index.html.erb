@@ -7,7 +7,9 @@
 
 <ul>
   <% @recipes.each do |recipe| %>
-    <h1><%= recipe.title %></h1>
+    <h1>
+      <%= link_to recipe.title, recipe %>
+    </h1>
     
     <li><%= recipe.recipe_type.name %></li>
     <li><%= recipe.cuisine.name %></li>

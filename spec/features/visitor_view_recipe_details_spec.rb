@@ -16,7 +16,7 @@ feature 'Visitor view recipe details' do
         cook_method: 'Amasse a batata e a beterraba ainda quentes até quase virar um purê. Em seguida adicione o azeite, levedo de cerveja, sal e misture bem. Adicione o polvilho azedo e o doce...')
     recipe2 = Recipe.create(title: 'Peixinho da Horta', difficulty: 'Fácil',
         recipe_type: prato_principal, cuisine: cuisine_pt, cook_time: 30,
-        ingredients: 'Folhas de Stachys Bizantina, 1/4  de xícara de farinha de trigo, 1/4 de xícara de fubá...',
+        ingredients: 'Folhas de Stachys Bizantina, 1/4 de xícara de farinha de trigo, 1/4 de xícara de fubá...',
         cook_method: 'Lave bem as folhas do peixinho da horta e seque-as muito bem com um pano de prato limpo ou papel toalha...')
     
     visit root_path
