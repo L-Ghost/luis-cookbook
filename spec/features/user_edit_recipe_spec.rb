@@ -20,7 +20,7 @@ feature 'User edit recipe' do
     
     # dados modificados
     fill_in 'Dificuldade', with: 'Difícil'
-    fill_in 'Tempo de Prearo', with: 45
+    fill_in 'Tempo de Preparo', with: 45
     select 'Mineira', from: 'Cozinha'
 
     click_on 'Enviar'
@@ -54,9 +54,9 @@ feature 'User edit recipe' do
     click_on 'Editar'
 
     # dados modificados
-    fill_in 'title', with: ''
-    fill_in 'ingredients', with: ''
-    fill_in 'cook_method', with: ''
+    fill_in 'Nome', with: ''
+    fill_in 'Ingredientes', with: ''
+    fill_in 'Modo de Preparo', with: ''
 
     click_on 'Enviar'
     expect(page).to have_content('Não foi possível salvar a Receita')

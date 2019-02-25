@@ -1,0 +1,8 @@
+<% if @recipe.errors.any? %>
+  
+  <h2>Não foi possível salvar a Receita</h2>
+  <% @recipe.errors.full_messages.each do |message| %>
+    <p><%= message %></p>
+  <% end %>
+  
+<% end %>
