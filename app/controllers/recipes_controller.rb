@@ -49,7 +49,7 @@ class RecipesController < ApplicationController
   end
   
   def search
-    if !params[:q].blank?
+    if !params[:q].nil?
       @recipes = Recipe.where("title like ?", "%#{params[:q]}%")
     end
   end
