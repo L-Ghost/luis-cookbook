@@ -80,6 +80,12 @@ feature 'User register recipe' do
     expect(page).to have_content('Já existe uma receita cadastrada com este nome')
     expect(Recipe.count).to eq(1)
   end
+
+  scenario 'but gets redirect to login' do
+    visit new_recipe_path
+
+    expect(current_path).to eq(new_user_session_path)
+  end
   
   # create data for validation and login
   def setup_data
