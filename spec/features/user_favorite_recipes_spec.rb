@@ -7,6 +7,7 @@ feature 'User see recipes at home page' do
     visit root_path
 
     expect(page).to have_css('img[src*="star.png"]')
+    expect(page).to have_css('img[alt*="Receita favorita"]')
   end
 
   scenario 'without a favorited recipe' do
@@ -14,6 +15,7 @@ feature 'User see recipes at home page' do
     visit root_path
 
     expect(page).not_to have_css('img[src*="star.png"]')
+    expect(page).not_to have_css('img[alt*="Receita favorita"]')
   end
 end
 
@@ -25,6 +27,7 @@ feature 'User favorite recipes' do
     click_on 'Adicionar como receita favorita'
     
     expect(page).to have_css('img[src*="star.png"]')
+    expect(page).to have_css('img[alt*="Receita favorita"]')
     expect(page).not_to have_link('Adicionar como receita favorita')
     expect(page).to have_link('Remover das receitas favoritas')
   end
@@ -39,6 +42,7 @@ feature 'User unfavorite recipes' do
     click_on 'Remover das receitas favorita'
 
     expect(page).not_to have_css('img[src*="star.png"]')
+    expect(page).not_to have_css('img[alt*="Receita favorita"]')
     expect(page).to have_link('Adicionar como receita favorita')
     expect(page).not_to have_link('Remover das receitas favoritas')
   end

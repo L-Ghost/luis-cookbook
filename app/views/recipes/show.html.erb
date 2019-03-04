@@ -1,5 +1,11 @@
 <h1><%= @recipe.title %></h1>
 
+<% if user_signed_in? %>
+  <% if @recipe.user == current_user and @recipe.favorite %>
+    <%= image_tag('/recipes/star.png', alt: 'Receita favorita') %>
+  <% end %>
+<% end %>
+
 <% if @recipe.photo.attached? %>
   <%= image_tag @recipe.photo %>
 <% end %>
@@ -24,6 +30,14 @@
 
 <div>
   <% if user_signed_in? %>
+    <p>
+      <% if @recipe.user == current_user and !@recipe.favorite %>
+        <%= link_to 'Adicionar como receita favorita', favorite_recipe_path, method: :post %>
+      <% else %>
+        <%= link_to 'Remover das receitas favoritas', unfavorite_recipe_path, method: :delete %>
+      <% end %>
+    </p>
+
     <p><%= link_to 'Editar', edit_recipe_path %></p>
     <p><%= link_to 'Deletar', @recipe, method: :delete %></p>
   <% end %>

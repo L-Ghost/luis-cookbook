@@ -18,6 +18,11 @@
     <h1>
       <%= link_to recipe.title, recipe %>
     </h1>
+    <% if user_signed_in? %>
+      <% if recipe.user == current_user and recipe.favorite %>
+        <%= image_tag('/recipes/star.png', alt: 'Receita favorita') %>
+      <% end %>
+    <% end %>
     
     <li><%= recipe.recipe_type.name %></li>
     <li><%= recipe.cuisine.name %></li>

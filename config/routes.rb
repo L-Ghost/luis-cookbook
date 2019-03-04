@@ -8,6 +8,10 @@ Rails.application.routes.draw do
       get :search
       get :my
     end
+    member do
+      post :favorite
+      delete :unfavorite
+    end
   end
 
   resources :recipe_types

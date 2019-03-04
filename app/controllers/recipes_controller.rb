@@ -60,6 +60,18 @@ class RecipesController < ApplicationController
     @recipes = Recipe.where(user: current_user)
   end
 
+  def favorite
+    @recipe = Recipe.find(params[:id])
+    @recipe.update(favorite: true)
+    redirect_to @recipe
+  end
+
+  def unfavorite
+    @recipe = Recipe.find(params[:id])
+    @recipe.update(favorite: false)
+    redirect_to @recipe
+  end
+  
   private
 
   def recipe_params
