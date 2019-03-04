@@ -1,9 +1,10 @@
 require 'rails_helper'
 
 feature 'User delete recipe' do
-  
   scenario 'successfully' do
-    # dados de receitas para o teste
+    # dados para o teste
+    user = User.create!(email: 'emailtest@cookbook.com', password: 't3stp4ssw0rd')
+    
     entrada = RecipeType.create(name: 'Entrada')
     prato_principal = RecipeType.create(name: 'Prato Principal')
 
@@ -19,6 +20,7 @@ feature 'User delete recipe' do
         ingredients: 'Folhas de Stachys Bizantina, 1/4 de xícara de farinha de trigo, 1/4 de xícara de fubá...',
         cook_method: 'Lave bem as folhas do peixinho da horta e seque-as muito bem com um pano de prato limpo ou papel toalha...')
     
+    login_as(user, scope: :user)
     visit root_path
     click_on recipe.title
     click_on 'Deletar'
@@ -28,5 +30,5 @@ feature 'User delete recipe' do
     expect(page).not_to have_css('h1', text: 'Pão de Queijo de Beterraba')
     expect(page).to have_css('h1', text: 'Peixinho da Horta')
   end
-
+  
 end

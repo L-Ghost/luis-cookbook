@@ -50,6 +50,7 @@ feature 'Visitor view recipe details' do
     expect(page).to have_css('p', text: recipe2.cook_method)
     # authentication
     expect(page).not_to have_link('Editar')
+    expect(page).not_to have_link('Deletar')
     
     click_on 'Voltar'
     expect(current_path).to eq(root_path)
