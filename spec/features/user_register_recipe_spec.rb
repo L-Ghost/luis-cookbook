@@ -1,19 +1,8 @@
 require 'rails_helper'
 
 feature 'User register recipe' do
-  before(:all) do
-    RecipeType.create(name: 'Entrada')
-    RecipeType.create(name: 'Prato Principal')
-    Cuisine.create(name: 'Brasileira')
-    Cuisine.create(name: 'Portuguesa')
-  end
-
-  after(:all) do
-    RecipeType.delete_all
-    Cuisine.delete_all
-  end
-
   scenario 'successfully' do
+    setup_data
     visit root_path
     click_on 'Cadastrar nova Receita'
     
@@ -45,6 +34,7 @@ feature 'User register recipe' do
   end
 
   scenario 'and leave some fields blank' do
+    setup_data
     visit root_path
     click_on 'Cadastrar nova Receita'
     
@@ -61,6 +51,7 @@ feature 'User register recipe' do
   end
 
   scenario 'and cannot repeat recipe name' do
+    setup_data
     visit root_path
     click_on 'Cadastrar nova Receita'
     
@@ -88,6 +79,17 @@ feature 'User register recipe' do
     expect(page).to have_content('Não foi possível salvar a Receita')
     expect(page).to have_content('Já existe uma receita cadastrada com este nome')
     expect(Recipe.count).to eq(1)
+  end
+  
+  # create data for validation and login
+  def setup_data
+    RecipeType.create(name: 'Entrada')
+    RecipeType.create(name: 'Prato Principal')
+    Cuisine.create(name: 'Brasileira')
+    Cuisine.create(name: 'Portuguesa')
+
+    user = User.create!(email: 'emailtest@cookbook.com', password: 't3stp4ssw0rd')
+    login_as(user, scope: :user)
   end
   
 end

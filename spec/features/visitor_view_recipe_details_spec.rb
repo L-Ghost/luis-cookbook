@@ -32,6 +32,8 @@ feature 'Visitor view recipe details' do
     expect(page).to have_css('p', text: recipe.ingredients)
     expect(page).to have_css('h3', text: 'Como Preparar')
     expect(page).to have_css('p', text: recipe.cook_method)
+    # authentication
+    expect(page).not_to have_link('Editar')
 
     click_on 'Voltar'
     click_on recipe2.title
@@ -46,6 +48,8 @@ feature 'Visitor view recipe details' do
     expect(page).to have_css('p', text: recipe2.ingredients)
     expect(page).to have_css('h3', text: 'Como Preparar')
     expect(page).to have_css('p', text: recipe2.cook_method)
+    # authentication
+    expect(page).not_to have_link('Editar')
     
     click_on 'Voltar'
     expect(current_path).to eq(root_path)

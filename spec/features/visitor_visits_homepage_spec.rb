@@ -7,6 +7,7 @@ feature 'Visitor visits homepage' do
 
     expect(page).to have_css('h1', text: 'CookBook')
     expect(page).to have_css('p', text: 'Bem-vindo ao maior livro de receitas online')
+    expect(page).not_to have_link('Cadastrar nova Receita')
   end
 
   scenario 'and view recipes list' do
