@@ -31,6 +31,7 @@ feature 'User register recipe' do
     expect(page).to have_css('h3', text: 'Como Preparar')
     expect(page).to have_css('p', text: 'Amasse a batata e a beterraba ainda quentes até quase virar um purê. Em seguida adicione o azeite, levedo de cerveja, sal e misture bem. Adicione o polvilho azedo e o doce...')
     expect(page).to have_css('img[src*="pdqdb.jpeg"]')
+    expect(page).to have_css('p', text: "Enviado por: emailtest@cookbook.com")
   end
 
   scenario 'and leave some fields blank' do
