@@ -3,6 +3,7 @@ require 'rails_helper'
 feature 'Admin register Recipe Type' do
   
   scenario 'successfully' do
+    setup_user
     visit root_path
     click_on 'Cadastrar novo Tipo de Receita'
     
@@ -15,6 +16,7 @@ feature 'Admin register Recipe Type' do
   end
 
   scenario 'and must fill in name' do
+    setup_user
     visit root_path
     click_on 'Cadastrar novo Tipo de Receita'
 
@@ -27,6 +29,7 @@ feature 'Admin register Recipe Type' do
   end
 
   scenario 'and must not repeat names' do
+    setup_user
     visit root_path
     click_on 'Cadastrar novo Tipo de Receita'
     fill_in 'Nome', with: 'Sobremesa'
@@ -41,5 +44,16 @@ feature 'Admin register Recipe Type' do
     expect(page).to have_content('Já existe um Tipo de Receita com o nome informado')
     expect(RecipeType.count).to eq(1)
   end
-  
+
+  scenario 'but gets redirect to login' do
+    visit new_recipe_type_path
+
+    expect(current_path).to eq(new_user_session_path)
+  end
+
+  # create data for login
+  def setup_user
+    user = User.create!(email: 'emailtest@cookbook.com', password: 't3stp4ssw0rd')
+    login_as(user, scope: :user)
+  end
 end

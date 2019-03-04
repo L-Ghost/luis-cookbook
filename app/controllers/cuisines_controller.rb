@@ -1,4 +1,5 @@
 class CuisinesController < ApplicationController
+  before_action :authenticate_user!, only: :new
   
   def show
     @cuisine = Cuisine.find(params[:id])

@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 feature 'Admin register Cuisine' do
-  
   scenario 'successfully' do
+    setup_user
     visit root_path
     click_on 'Cadastrar nova Cozinha'
     
@@ -15,6 +15,7 @@ feature 'Admin register Cuisine' do
   end
 
   scenario 'and must fill in name' do
+    setup_user
     visit root_path
     click_on 'Cadastrar nova Cozinha'
 
@@ -27,6 +28,7 @@ feature 'Admin register Cuisine' do
   end
 
   scenario 'and must not repeat cuisine names' do
+    setup_user
     visit root_path
     click_on 'Cadastrar nova Cozinha'
     fill_in 'Nome', with: 'Portuguesa'
@@ -41,5 +43,16 @@ feature 'Admin register Cuisine' do
     expect(page).to have_content('Já existe uma Cozinha com o nome informado')
     expect(Cuisine.count).to eq(1)
   end
-  
+
+  scenario 'but gets redirect to login' do
+    visit new_cuisine_path
+
+    expect(current_path).to eq(new_user_session_path)
+  end
+
+  # create data for login
+  def setup_user
+    user = User.create!(email: 'emailtest@cookbook.com', password: 't3stp4ssw0rd')
+    login_as(user, scope: :user)
+  end  
 end
