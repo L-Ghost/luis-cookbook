@@ -20,6 +20,8 @@
 
 <p><%= @recipe.cook_method %></p>
 
+<p>Enviado por: <%= @recipe.user.email %></p>
+
 <div>
   <% if user_signed_in? %>
     <p><%= link_to 'Editar', edit_recipe_path %></p>

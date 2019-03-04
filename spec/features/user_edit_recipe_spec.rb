@@ -35,12 +35,14 @@ feature 'User edit recipe' do
   end
   
   scenario 'and should not leave some fields blank' do
+    user = User.create!(email: 'masterchef@cookbook.com', password: 'fogacajacquinpaola')
     recipe_type = RecipeType.create(name: 'Prato Principal')
     cuisine = Cuisine.create(name: 'Portuguesa')
     recipe = Recipe.create(title: 'Peixinho da Horta', difficulty: 'Fácil',
         recipe_type: recipe_type, cuisine: cuisine, cook_time: 30,
         ingredients: 'Folhas de Stachys Bizantina, 1/4 de xícara de farinha de trigo, 1/4 de xícara de fubá...',
-        cook_method: 'Lave bem as folhas do peixinho da horta e seque-as muito bem com um pano de prato limpo ou papel toalha...')
+        cook_method: 'Lave bem as folhas do peixinho da horta e seque-as muito bem com um pano de prato limpo ou papel toalha...',
+        user: user)
     
     setup_user
     visit root_path
@@ -72,6 +74,7 @@ feature 'User edit recipe' do
 
   def setup_recipe
     # dados da receita para o teste
+    user = User.create!(email: 'masterchef@cookbook.com', password: 'fogacajacquinpaola')
     recipe_type = RecipeType.create(name: 'Entrada')
     cuisine = Cuisine.create(name: 'Brasileira')
     cuisine2 = Cuisine.create(name: 'Mineira')
@@ -84,7 +87,8 @@ feature 'User edit recipe' do
     recipe = Recipe.create(title: 'Pão de Queijo de Beterraba', difficulty: 'Médio',
         recipe_type: recipe_type, cuisine: cuisine, cook_time: 40,
         ingredients: ingredients,
-        cook_method: cook_method)
+        cook_method: cook_method,
+        user: user)
   end
   
 end

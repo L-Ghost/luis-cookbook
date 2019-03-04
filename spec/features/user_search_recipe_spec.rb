@@ -51,16 +51,19 @@ feature 'User search Recipe' do
   
   # informacao inicial necessaria para o teste
   def recipes_setup
+    user = User.create!(email: 'toriko@cookbook.com', password: 'shonenjump2008')
     recipe_type = RecipeType.create(name: 'Sobremesa')
     cuisine = Cuisine.create(name: 'Internacional')
     Recipe.create(title: 'Torta de Morango', difficulty: 'Médio',
         recipe_type: recipe_type, cuisine: cuisine, cook_time: 120,
         ingredients: 'Morango, farinha, ovos',
-        cook_method: 'Misture tudo e coloque no forno')
+        cook_method: 'Misture tudo e coloque no forno',
+        user: user)
     Recipe.create(title: 'Torta de Limão', difficulty: 'Médio',
         recipe_type: recipe_type, cuisine: cuisine, cook_time: 120,
         ingredients: 'Limão, farinha, ovos',
-        cook_method: 'Misture tudo e coloque no forno')
+        cook_method: 'Misture tudo e coloque no forno',
+        user: user)
   end
 
 end
