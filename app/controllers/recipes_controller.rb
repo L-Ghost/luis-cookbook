@@ -1,5 +1,5 @@
 class RecipesController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :edit]
+  before_action :authenticate_user!, only: [:new, :edit, :my]
 
   def index
     @recipes = Recipe.all
@@ -54,6 +54,10 @@ class RecipesController < ApplicationController
     if !params[:q].nil?
       @recipes = Recipe.where("title like ?", "%#{params[:q]}%")
     end
+  end
+
+  def my
+    @recipes = Recipe.where(user: current_user)
   end
 
   private

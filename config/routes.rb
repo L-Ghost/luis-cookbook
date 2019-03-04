@@ -6,8 +6,10 @@ Rails.application.routes.draw do
   resources :recipes do
     collection do
       get :search
+      get :my
     end
   end
+
   resources :recipe_types
   resources :cuisines
 end

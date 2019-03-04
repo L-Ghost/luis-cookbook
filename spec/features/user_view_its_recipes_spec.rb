@@ -23,7 +23,7 @@ feature 'User view its recipes' do
     expect(page).to have_link('Torta de Morango')
     expect(page).to have_link('Torta de Limão')
     expect(page).not_to have_link('Torta de Abacate')
-    expect(page).to have_css('h2', 'Total de Receitas cadastradas: 2')
+    expect(page).to have_css('h2', text: 'Total de Receitas cadastradas: 2')
   end
   
   # informacao inicial necessaria para o teste
@@ -47,7 +47,7 @@ feature 'User view its recipes' do
         recipe_type: another_recipe_type, cuisine: cuisine, cook_time: 120,
         ingredients: 'Abacate, farinha, ovos, decoracoes',
         cook_method: 'Misture tudo, coloque no forno, e apos retirar decore a torta',
-        user: user)
+        user: another_user)
     login_as(user, scope: :user)
   end
 end
