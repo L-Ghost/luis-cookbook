@@ -2,7 +2,7 @@
 
 <% if user_signed_in? %>
   <% if @recipe.user == current_user and @recipe.favorite %>
-    <%= image_tag('/recipes/star.png', alt: 'Receita favorita') %>
+    <%= image_tag('/assets/recipes/star.png', alt: 'Receita favorita') %>
   <% end %>
 <% end %>
 
@@ -37,8 +37,10 @@
         <%= link_to 'Remover das receitas favoritas', unfavorite_recipe_path, method: :delete %>
       <% end %>
     </p>
-
-    <p><%= link_to 'Editar', edit_recipe_path %></p>
+    
+    <% if @recipe.user == current_user %>
+      <p><%= link_to 'Editar', edit_recipe_path %></p>
+    <% end %>
     <p><%= link_to 'Deletar', @recipe, method: :delete %></p>
   <% end %>
   <p><%= link_to 'Voltar', root_path %></p>

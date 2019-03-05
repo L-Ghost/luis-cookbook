@@ -29,6 +29,7 @@ class RecipesController < ApplicationController
 
   def edit
     @recipe = Recipe.find(params[:id])
+    redirect_to root_path if @recipe.user != current_user
     @recipe_types = RecipeType.all
     @cuisines = Cuisine.all
   end

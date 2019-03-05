@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'User edit recipe' do
   
   scenario 'successfully' do
-    recipe = setup_recipe
+    recipe = setup_recipes
     setup_user
     visit root_path
     click_on recipe.title
@@ -59,31 +59,56 @@ feature 'User edit recipe' do
     expect(page).to have_css('h1', text: 'Edição de Receitas')
   end
 
+  scenario 'only if recipe belongs to itself' do
+    setup_recipes
+    setup_user
+    
+    visit root_path
+    click_on Recipe.first.title # pão de queijo
+    
+    expect(page).not_to have_link('Editar')
+  end
+
   scenario 'but gets redirect to login' do
-    recipe = setup_recipe
+    recipe = setup_recipes
     visit edit_recipe_path(recipe)
 
     expect(current_path).to eq(new_user_session_path)
   end
 
-  # create data for login
-  def setup_user
-    user = User.create!(email: 'emailtest@cookbook.com', password: 't3stp4ssw0rd')
-    login_as(user, scope: :user)
+  scenario 'but gets redirect to login because it is not its recipe' do
+    setup_recipes
+    setup_user
+    visit edit_recipe_path(Recipe.first) # pão de queijo
+    
+    expect(current_path).to eq(root_path)
   end
 
-  def setup_recipe
+  # create data for login
+  def setup_user
+    login_as(User.where(email: 'masterchef@cookbook.com').first, scope: :user)
+  end
+
+  def setup_recipes
     # dados da receita para o teste
     user = User.create!(email: 'masterchef@cookbook.com', password: 'fogacajacquinpaola')
+    another_user = User.create!(email: 'particip.masterchef@cookbook.com', password: 'm4st3rch3f')
     recipe_type = RecipeType.create(name: 'Entrada')
     cuisine = Cuisine.create(name: 'Brasileira')
-    cuisine2 = Cuisine.create(name: 'Mineira')
+    Cuisine.create(name: 'Mineira')
     ingredients = '1 batata média cozida, 1 beterraba cozida, 1/2 xícara de polvilho'
     ingredients << ' azedo, 2 colheres de sopa de azeite, 1 olher de chá de sal, 1/2 colher de'
     ingredients << ' levedo de cerveja (opcional)'
     cook_method = 'Amasse a batata e a beterraba ainda quentes até quase virar um'
     cook_method << ' purê. Em seguida adicione o azeite, levedo de cerveja, sal e misture bem.' 
     cook_method << ' Adicione o polvilho azedo e o doce...'
+
+    another_recipe = Recipe.create!(title: 'Pão de Queijo', difficulty: 'Fácil',
+        recipe_type: recipe_type, cuisine: cuisine, cook_time: 40,
+        ingredients: 'Polvilho, azeite, sal, queijo',
+        cook_method: 'Amasse tudo, mexa bem, coloque nas formas e esquente no forno',
+        user: another_user)
+
     recipe = Recipe.create(title: 'Pão de Queijo de Beterraba', difficulty: 'Médio',
         recipe_type: recipe_type, cuisine: cuisine, cook_time: 40,
         ingredients: ingredients,

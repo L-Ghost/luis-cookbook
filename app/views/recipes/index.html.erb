@@ -20,7 +20,7 @@
     </h1>
     <% if user_signed_in? %>
       <% if recipe.user == current_user and recipe.favorite %>
-        <%= image_tag('/recipes/star.png', alt: 'Receita favorita') %>
+        <%= image_tag('/assets/recipes/star.png', alt: 'Receita favorita') %>
       <% end %>
     <% end %>
     
