@@ -40,8 +40,8 @@
     
     <% if @recipe.user == current_user %>
       <p><%= link_to 'Editar', edit_recipe_path %></p>
+      <p><%= link_to 'Deletar', @recipe, method: :delete %></p>
     <% end %>
-    <p><%= link_to 'Deletar', @recipe, method: :delete %></p>
   <% end %>
   <p><%= link_to 'Voltar', root_path %></p>
 <div>
