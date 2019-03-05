@@ -30,13 +30,15 @@
 
 <div>
   <% if user_signed_in? %>
-    <p>
-      <% if @recipe.user == current_user and !@recipe.favorite %>
-        <%= link_to 'Adicionar como receita favorita', favorite_recipe_path, method: :post %>
-      <% else %>
-        <%= link_to 'Remover das receitas favoritas', unfavorite_recipe_path, method: :delete %>
-      <% end %>
-    </p>
+    <% if @recipe.user == current_user %>
+      <p>
+        <% if !@recipe.favorite %>
+          <%= link_to 'Adicionar como receita favorita', favorite_recipe_path, method: :post %>
+        <% else %>
+          <%= link_to 'Remover das receitas favoritas', unfavorite_recipe_path, method: :delete %>
+        <% end %>
+      </p>
+    <% end %>
     
     <% if @recipe.user == current_user %>
       <p><%= link_to 'Editar', edit_recipe_path %></p>

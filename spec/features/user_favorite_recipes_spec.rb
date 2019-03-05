@@ -31,6 +31,14 @@ feature 'User favorite recipes' do
     expect(page).not_to have_link('Adicionar como receita favorita')
     expect(page).to have_link('Remover das receitas favoritas')
   end
+
+  scenario 'only if the recipe belongs to the user' do
+    setup_data
+    visit root_path
+    click_on Recipe.first.title
+
+    expect(page).not_to have_link('Adicionar como receita favorita')
+  end
 end
 
 feature 'User unfavorite recipes' do
@@ -46,10 +54,21 @@ feature 'User unfavorite recipes' do
     expect(page).to have_link('Adicionar como receita favorita')
     expect(page).not_to have_link('Remover das receitas favoritas')
   end
+
+  scenario 'only if the recipe belongs to the user' do
+    setup_data
+    visit root_path
+    another_recipe = Recipe.first
+    another_recipe.update(favorite: true)
+    click_on another_recipe.title
+
+    expect(page).not_to have_link('Remover das receitas favoritas')
+  end
 end
 
 def setup_data
   user = User.create!(email: 'sanji@cookbook.com', password: 'shonenjump1997')
+  another_user = User.create!(email: 'toriko@cookbook.com', password: 'shonenjump2008')
   recipe_type = RecipeType.create(name: 'Sobremesa Hipster')
   cuisine = Cuisine.create(name: 'Internacional')
   login_as(user, scope: :user)
@@ -57,6 +76,12 @@ def setup_data
   Recipe.create!(title: 'Torta de Abacate', difficulty: 'Médio',
       recipe_type: recipe_type, cuisine: cuisine, cook_time: 120,
       ingredients: 'Abacate, farinha, ovos, decoracoes',
+      cook_method: 'Misture tudo, coloque no forno, e apos retirar decore a torta',
+      user: another_user, favorite: false)
+
+  Recipe.create!(title: 'Torta de Abacaxi', difficulty: 'Médio',
+      recipe_type: recipe_type, cuisine: cuisine, cook_time: 120,
+      ingredients: 'Abacaxi, farinha, ovos, decoracoes',
       cook_method: 'Misture tudo, coloque no forno, e apos retirar decore a torta',
       user: user, favorite: false)
 end
