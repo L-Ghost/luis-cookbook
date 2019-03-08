@@ -1,0 +1,7 @@
+<h1>Minhas Listas</h1>
+
+<h2>Total de Listas: <%= @lists.count %></h2>
+
+<% @lists.each do |list| %>
+  <%= link_to list.name, list %>
+<% end %>

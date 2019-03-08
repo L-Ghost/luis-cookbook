@@ -16,4 +16,10 @@ Rails.application.routes.draw do
 
   resources :recipe_types
   resources :cuisines
+
+  resources :lists do
+    collection do
+      get :my
+    end
+  end
 end
