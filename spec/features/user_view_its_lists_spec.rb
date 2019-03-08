@@ -28,9 +28,11 @@ feature 'User view its lists' do
   
   def setup_data
     user = User.create!(email: 'chicobento@tdm.com', password: 'chicao2018')
+    another_user = User.create!(email: 'rosinha@tdm.com', password: 'rosinha2017')
     List.create!(name: 'Tortas', user: user)
     List.create!(name: 'Doces', user: user)
     List.create!(name: 'Festa Junina', user: user)
+    List.create!(name: 'Bolos', user: another_user)
     login_as(user, scope: :user)
   end
 end
