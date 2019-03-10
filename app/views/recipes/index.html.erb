@@ -6,9 +6,11 @@
   <% if user_signed_in? %>
     <p><%= link_to 'Minhas Receitas', my_recipes_path %></p>
     <p><%= link_to 'Minhas Listas', my_lists_path %></p>
+
     <p><%= link_to 'Cadastrar nova Receita', new_recipe_path %></p>
     <p><%= link_to 'Cadastrar novo Tipo de Receita', new_recipe_type_path %></p>
     <p><%= link_to 'Cadastrar nova Cozinha', new_cuisine_path %></p>
+    <p><%= link_to 'Adicionar nova Lista', new_list_path %></p>
   <% end %>
 
   <p><%= link_to 'Buscar uma Receita', search_recipes_path %></p>

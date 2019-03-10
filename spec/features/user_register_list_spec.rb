@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Admin register Cuisine' do
+feature 'Admin register List' do
   scenario 'successfully' do
     setup_user
     visit root_path
