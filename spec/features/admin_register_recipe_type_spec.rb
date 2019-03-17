@@ -53,7 +53,7 @@ feature 'Admin register Recipe Type' do
 
   # create data for login
   def setup_user
-    user = User.create!(email: 'emailtest@cookbook.com', password: 't3stp4ssw0rd')
+    user = create(:user)
     login_as(user, scope: :user)
   end
 end

@@ -14,26 +14,24 @@ feature 'User view list details' do
   end
 
   def setup_data
-    user = User.create!(email: 'emailtest@cookbook.com', password: 't3stp4ssw0rd')
-    
-    recipe_type = RecipeType.create(name: 'Sobremesa')
-    cuisine = Cuisine.create(name: 'Internacional')
-  
-    torta_abacate = Recipe.create!(title: 'Torta de Abacate', difficulty: 'Médio',
+    user = create(:user)
+    recipe_type = create(:recipe_type, name: 'Sobremesa')
+    cuisine = create(:cuisine, name: 'Internacional')
+
+    torta_abacate = create(:recipe, title: 'Torta de Abacate', difficulty: 'Médio',
       recipe_type: recipe_type, cuisine: cuisine, cook_time: 120,
       ingredients: 'Abacate, farinha, ovos, decoracoes',
       cook_method: 'Misture tudo, coloque no forno, e apos retirar decore a torta',
       user: user)
-
-    torta_abacaxi = Recipe.create!(title: 'Torta de Abacaxi', difficulty: 'Médio',
+    torta_abacaxi = create(:recipe, title: 'Torta de Abacaxi', difficulty: 'Médio',
       recipe_type: recipe_type, cuisine: cuisine, cook_time: 120,
       ingredients: 'Abacaxi, farinha, ovos, decoracoes',
       cook_method: 'Misture tudo, coloque no forno, e apos retirar decore a torta',
       user: user)
     
-    list = List.create!(name: 'Tortas', user: user)
-    ListRecipe.create!(list: list, recipe: torta_abacate)
-    ListRecipe.create!(list: list, recipe: torta_abacaxi)
+    list = create(:list, name: 'Tortas', user: user)
+    create(:list_recipe, list: list, recipe: torta_abacate)
+    create(:list_recipe, list: list, recipe: torta_abacaxi)
     
     login_as(user, scope: :user)
   end

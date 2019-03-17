@@ -2,7 +2,8 @@ require 'rails_helper'
 
 feature 'User register recipe' do
   scenario 'successfully' do
-    setup_data
+    user = setup_data
+    login_as(user, scope: :user)
     visit root_path
     click_on 'Cadastrar nova Receita'
     
@@ -31,11 +32,12 @@ feature 'User register recipe' do
     expect(page).to have_css('h3', text: 'Como Preparar')
     expect(page).to have_css('p', text: 'Amasse a batata e a beterraba ainda quentes até quase virar um purê. Em seguida adicione o azeite, levedo de cerveja, sal e misture bem. Adicione o polvilho azedo e o doce...')
     expect(page).to have_css('img[src*="pdqdb.jpeg"]')
-    expect(page).to have_css('p', text: "Enviado por: emailtest@cookbook.com")
+    expect(page).to have_css('p', text: "Enviado por: #{user.email}")
   end
 
   scenario 'and leave some fields blank' do
-    setup_data
+    user = setup_data
+    login_as(user, scope: :user)
     visit root_path
     click_on 'Cadastrar nova Receita'
     
@@ -52,7 +54,8 @@ feature 'User register recipe' do
   end
 
   scenario 'and cannot repeat recipe name' do
-    setup_data
+    user = setup_data
+    login_as(user, scope: :user)
     visit root_path
     click_on 'Cadastrar nova Receita'
     
@@ -90,13 +93,12 @@ feature 'User register recipe' do
   
   # create data for validation and login
   def setup_data
-    RecipeType.create(name: 'Entrada')
-    RecipeType.create(name: 'Prato Principal')
-    Cuisine.create(name: 'Brasileira')
-    Cuisine.create(name: 'Portuguesa')
+    create(:recipe_type, name: 'Entrada')
+    create(:recipe_type, name: 'Prato Principal')
+    create(:cuisine, name: 'Brasileira')
+    create(:cuisine, name: 'Portuguesa')
 
-    user = User.create!(email: 'emailtest@cookbook.com', password: 't3stp4ssw0rd')
-    login_as(user, scope: :user)
+    user = create(:user)
   end
   
 end

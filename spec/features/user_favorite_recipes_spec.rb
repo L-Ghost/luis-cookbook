@@ -67,19 +67,19 @@ feature 'User unfavorite recipes' do
 end
 
 def setup_data
-  user = User.create!(email: 'sanji@cookbook.com', password: 'shonenjump1997')
-  another_user = User.create!(email: 'toriko@cookbook.com', password: 'shonenjump2008')
-  recipe_type = RecipeType.create(name: 'Sobremesa Hipster')
-  cuisine = Cuisine.create(name: 'Internacional')
+  user = create(:user)
+  another_user = create(:user)
+  recipe_type = create(:recipe_type, name: 'Sobremesa Hipster')
+  cuisine = create(:cuisine, name: 'Internacional')
   login_as(user, scope: :user)
   
-  Recipe.create!(title: 'Torta de Abacate', difficulty: 'Médio',
+  create(:recipe, title: 'Torta de Abacate', difficulty: 'Médio',
       recipe_type: recipe_type, cuisine: cuisine, cook_time: 120,
       ingredients: 'Abacate, farinha, ovos, decoracoes',
       cook_method: 'Misture tudo, coloque no forno, e apos retirar decore a torta',
       user: another_user, favorite: false)
 
-  Recipe.create!(title: 'Torta de Abacaxi', difficulty: 'Médio',
+  create(:recipe, title: 'Torta de Abacaxi', difficulty: 'Médio',
       recipe_type: recipe_type, cuisine: cuisine, cook_time: 120,
       ingredients: 'Abacaxi, farinha, ovos, decoracoes',
       cook_method: 'Misture tudo, coloque no forno, e apos retirar decore a torta',

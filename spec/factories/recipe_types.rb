@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :recipe_type do
-    { name: 'Recipe Type' }
+    sequence(:name) {|i| "Recipe Type #{i}"}
   end
 end

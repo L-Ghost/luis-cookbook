@@ -50,28 +50,28 @@ feature 'User view its recipes' do
   
   # informacao inicial necessaria para o teste
   def setup_data
-    user = User.create!(email: 'toriko@cookbook.com', password: 'shonenjump2008')
-    another_user = User.create!(email: 'sanji@cookbook.com', password: 'shonenjump1997')
-    recipe_type = RecipeType.create(name: 'Sobremesa')
-    another_recipe_type = RecipeType.create(name: 'Sobremesa Hipster')
-    cuisine = Cuisine.create(name: 'Internacional')
-    torta_morango = Recipe.create(title: 'Torta de Morango', difficulty: 'Médio',
+    user = create(:user)
+    another_user = create(:user)
+    recipe_type = create(:recipe_type)
+    another_recipe_type = create(:recipe_type)
+    cuisine = create(:cuisine)
+    torta_morango = create(:recipe, title: 'Torta de Morango', difficulty: 'Médio',
         recipe_type: recipe_type, cuisine: cuisine, cook_time: 120,
         ingredients: 'Morango, farinha, ovos',
         cook_method: 'Misture tudo e coloque no forno',
         user: user)
-    Recipe.create(title: 'Torta de Limão', difficulty: 'Médio',
+    create(:recipe, title: 'Torta de Limão', difficulty: 'Médio',
         recipe_type: recipe_type, cuisine: cuisine, cook_time: 120,
         ingredients: 'Limão, farinha, ovos',
         cook_method: 'Misture tudo e coloque no forno',
         user: user)
-    Recipe.create(title: 'Torta de Abacate', difficulty: 'Médio',
+    create(:recipe, title: 'Torta de Abacate', difficulty: 'Médio',
         recipe_type: another_recipe_type, cuisine: cuisine, cook_time: 120,
         ingredients: 'Abacate, farinha, ovos, decoracoes',
         cook_method: 'Misture tudo, coloque no forno, e apos retirar decore a torta',
         user: another_user)
-    sobremesas = List.create!(name: 'Sobremesas', user: user)
-    ListRecipe.create!(list: sobremesas, recipe: torta_morango)
+    sobremesas = create(:list, name: 'Sobremesas', user: user)
+    create(:list_recipe, list: sobremesas, recipe: torta_morango)
     login_as(user, scope: :user)
   end
 end

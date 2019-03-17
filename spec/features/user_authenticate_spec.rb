@@ -49,6 +49,6 @@ feature 'User Authenticate' do
   end
 
   def setup_user
-    User.create!(email: 'emailtest@cookbook.com', password: 't3stp4ssw0rd')
+    create(:user)
   end
 end

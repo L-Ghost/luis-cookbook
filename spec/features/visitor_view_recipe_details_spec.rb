@@ -4,13 +4,11 @@ feature 'Visitor view recipe details' do
   
   scenario 'successfully' do
     # dados de receitas para o teste
-    user = User.create!(email: 'emailtest@cookbook.com', password: 't3stp4ssw0rd')
-    
-    entrada = RecipeType.create(name: 'Entrada')
-    prato_principal = RecipeType.create(name: 'Prato Principal')
-
-    cuisine_br = Cuisine.create(name: 'Brasileira')
-    cuisine_pt = Cuisine.create(name: 'Portuguesa')
+    user = create(:user)
+    entrada = create(:recipe_type, name: 'Entrada')
+    prato_principal = create(:recipe_type, name: 'Prato Principal')
+    cuisine_br = create(:cuisine, name: 'Brasileira')
+    cuisine_pt = create(:cuisine, name: 'Portuguesa')
 
     recipe = Recipe.create(title: 'Pão de Queijo de Beterraba', difficulty: 'Médio',
         recipe_type: entrada, cuisine: cuisine_br, cook_time: 40,

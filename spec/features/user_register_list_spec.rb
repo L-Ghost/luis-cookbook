@@ -65,12 +65,12 @@ feature 'Admin register List' do
 
   # create data for test
   def setup_user
-    user = User.create!(email: 'emailtest@cookbook.com', password: 't3stp4ssw0rd')
+    user = create(:user)
     login_as(user, scope: :user)
   end
 
   def setup_another_user
-    another_user = User.create!(email: 'emailtest2@cookbook.com', password: 't4stp3ssw0rd')
-    List.create!(name: 'Doces', user: another_user)
+    another_user = create(:user)
+    create(:list, name: 'Doces', user: another_user)
   end
 end
