@@ -7,7 +7,7 @@ feature 'User view list details' do
     click_on 'Minhas Listas'
     click_on 'Tortas'
 
-    expect(page).to have_css('h1', 'Tortas')
+    expect(page).to have_css('h1', text: 'Tortas')
     expect(page).to have_link('Torta de Abacate')
     expect(page).to have_link('Torta de Abacaxi')
     expect(page).to have_css('h2', text: 'Total de Receitas da Lista: 2')

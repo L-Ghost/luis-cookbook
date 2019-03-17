@@ -1,1 +1,12 @@
 <h1><%= @list.name %></h1>
+
+<h2>
+  <%= "Total de Receitas da Lista: #{@list.recipes.count}" %>
+</h2>
+<ul>
+  <% @list.recipes.each do |recipe| %>
+  
+    <li><%= link_to recipe.title, recipe %></li>
+    
+  <% end %>
+</ul>

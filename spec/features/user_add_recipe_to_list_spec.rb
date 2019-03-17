@@ -6,12 +6,12 @@ feature 'User adds Recipe to List' do
 
     visit root_path
     click_on 'Pão de Queijo de Beterraba'
-    select 'Receitas da Renata', from: 'Lista'
+    select 'Receitas da Renata', from: 'Adicionar para Lista'
     click_on 'Adicionar'
 
     visit root_path
     click_on 'Peixinho da Horta'
-    select 'Receitas da Renata', from: 'Lista'
+    select 'Receitas da Renata', from: 'Adicionar para Lista'
     click_on 'Adicionar'
 
     visit root_path

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     member do
       post :favorite
       delete :unfavorite
+      post :add_to_list
     end
   end
 

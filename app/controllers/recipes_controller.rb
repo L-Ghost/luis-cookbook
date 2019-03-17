@@ -7,6 +7,7 @@ class RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.find(params[:id])
+    @lists = List.all
   end
 
   def new
@@ -70,6 +71,13 @@ class RecipesController < ApplicationController
   def unfavorite
     @recipe = Recipe.find(params[:id])
     @recipe.update(favorite: false)
+    redirect_to @recipe
+  end
+
+  def add_to_list
+    @recipe = Recipe.find(params[:id])
+    @list = List.find(params[:list_id])
+    ListRecipe.create(list: @list, recipe: @recipe)
     redirect_to @recipe
   end
   
