@@ -14,13 +14,11 @@ feature 'Visitor visits homepage' do
 
   scenario 'and view recipes list' do
     # dados de receitas para testar pagina inicial
-    user = User.create!(email: 'masterchef@cookbook.com', password: 'fogacajacquinpaola')
-
-    entrada = RecipeType.create(name: 'Entrada')
-    prato_principal = RecipeType.create(name: 'Prato Principal')
-
-    cuisine_br = Cuisine.create(name: 'Brasileira')
-    cuisine_pt = Cuisine.create(name: 'Portuguesa')
+    user = create(:user)
+    entrada = create(:recipe_type, name: 'Entrada')
+    prato_principal = create(:recipe_type, name: 'Prato Principal')
+    cuisine_br = create(:cuisine, name: 'Brasileira')
+    cuisine_pt = create(:cuisine, name: 'Portuguesa')
 
     recipe = Recipe.create(title: 'Pão de Queijo de Beterraba', difficulty: 'Médio',
         recipe_type: entrada, cuisine: cuisine_br, cook_time: 40,
