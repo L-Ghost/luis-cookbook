@@ -39,6 +39,21 @@
         <% end %>
       </p>
     <% end %>
+    
+    <div>
+      <h3>
+        <% if @recipe.lists.count == 0 %>
+          Você não incluiu esta receita a nenhuma lista:
+        <% else %>
+          Esta receita pertence às seguintes listas:
+        <% end %>
+      </h3>
+      <ul>
+        <% @recipe.lists.each do |list| %>
+          <li><%= link_to list.name, list %></li>
+        <% end %>
+      </ul>
+    </div>
 
     <%= form_tag(add_to_list_recipe_path(@recipe)) do %>
       
