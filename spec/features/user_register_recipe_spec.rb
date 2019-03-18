@@ -68,7 +68,7 @@ feature 'User register recipe' do
     fill_in 'Modo de Preparo', with: 'Lave bem as folhas do peixinho da horta e seque-as muito bem com um pano de prato limpo ou papel toalha...'
 
     click_on 'Enviar'
-    click_on 'Voltar'
+    visit root_path
     click_on 'Cadastrar nova Receita'
     
     fill_in 'Nome', with: 'Peixinho da Horta'
